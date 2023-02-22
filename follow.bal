@@ -28,4 +28,10 @@ service /follow on new http:Listener(9090) {
         sql:ParameterizedQuery query = `DELETE FROM following WHERE user_id = ${userId} AND product_id = ${productId}`;
         _ = check self.dbClient->execute(query);
     }
+
+    function stop() returns error? {
+        // Close the mysql client at the end of the service. This will close the
+        // connection pool and release all the connections.
+        _ = check self.dbClient.close();
+    }
 }

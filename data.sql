@@ -16,7 +16,6 @@ create table following
 (
     id int auto_increment
         primary key,
-    email varchar(255),
     product_id int,
     user_id int
 );
